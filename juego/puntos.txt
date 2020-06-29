@@ -1,0 +1,10 @@
+Tony,1000
+Marky,900
+Miranda,800
+Bart,700
+Lisa,600
+Maggie,500
+Clio,400
+Keimi,300
+Kamikaze,200
+Salem,100
