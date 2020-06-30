@@ -2,4 +2,5 @@ Integrantes:
 	Joaquin Damian Beracocha Sosa
 	Santiago Rivero
 	Fermin Miranda
-Ejecutar ScrabbleAr.py
+Ejecutar:
+	El juego tiene algunas fallas para ejecutarse en Linux, sin embargo en Windows funciona, tratar de ejecutarlo en ese sistema operativo.
