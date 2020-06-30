@@ -30,3 +30,6 @@ while True:
     archivo= open("puntos.txt","r")
     tabla=Top()
     tabla.CrearTop(archivo)
+  if event == 'Salir':
+    break
+window.close()
