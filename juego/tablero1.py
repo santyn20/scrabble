@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 from boton import Boton
 from atril import Atril
 from pozo import Pozo
+import sys
 class Tablero1():
   def __init__(self):
     self.matriz=[[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],
@@ -40,12 +41,15 @@ class Tablero1():
     letra = ''
     while True:
       event,values = window.Read()
-      if event == "Cerrar":
-        break
-      elif event.isalpha():
-        letra = event
-      elif ((event.isalpha() == False) and (letra != '')):
-        window.Element(event).Update(letra)
+      try:
+        if event == "Cerrar":
+          break
+        elif event.isalpha():
+          letra = event
+        elif ((event.isalpha() == False) and (letra != '')):
+          window.Element(event).Update(letra)
+      except AttributeError:
+        sys.exit()
 
 
     window.close()
