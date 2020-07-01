@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 from boton import Boton
 from atril import Atril
 from pozo import Pozo
+import sys
 class Tablero2():
 
   
@@ -45,11 +46,14 @@ class Tablero2():
     letra = ''
     while True:
       event,values = window.Read()
-      if event == "Cerrar":
-        break
-      elif event.isalpha():
-        letra = event
-      elif ((event.isalpha() == False) and (letra != '')):
-        window.Element(event).Update(letra)
+      try:
+        if event == "Cerrar":
+          break
+        elif event.isalpha():
+          letra = event
+        elif ((event.isalpha() == False) and (letra != '')):
+          window.Element(event).Update(letra)
+      except AttributeError:
+        sys.exit()
 
     window.close()
