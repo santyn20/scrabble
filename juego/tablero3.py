@@ -44,6 +44,8 @@ class Tablero3():
     layout.append([sg.Button("Cerrar")])
     window = sg.Window('Tablero', layout)
     letra = ''
+    valor={}
+    sg.popup('La primer letra se debe ubicar en el centro del tablero')
     while True:
       event,values = window.Read()
       try:
@@ -51,9 +53,16 @@ class Tablero3():
           break
         elif event.isalpha():
           letra = event
-        elif ((event.isalpha() == False) and (letra != '')):
+        elif ((event.isalpha() == False) and (letra != '') and (valor[event]==False) ):
           window.Element(event).Update(letra)
+          num = event
+          valor[event]=True
+          letra=""
       except AttributeError:
         sys.exit()
-
+      except KeyError:
+        window.Element(event).Update(letra)
+        num = event
+        valor[event]=True
+        letra=""
     window.close()
