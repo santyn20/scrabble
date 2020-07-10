@@ -46,8 +46,6 @@ class Tablero1():
       try:
         if event == "Cerrar":
           break
-        #elif event == "Check":
-         # c = Check()
         elif event.isalpha():
           letra = event
         elif ((event.isalpha() == False) and (letra != '') and (valor[event]==False) ):
