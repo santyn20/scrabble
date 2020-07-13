@@ -37,7 +37,7 @@ class Tablero1():
       atril.agregarLetras(pozo.getFicha()[0])
 
     layout.append(atril.mostrarAtril(atril))
-    layout.append([sg.Button("Cerrar")])
+    layout.append([sg.Button("Check"), sg.Button("Cerrar")])
     window = sg.Window('Tablero', layout)
     letra = ''
     pal=[]
