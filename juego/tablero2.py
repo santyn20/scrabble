@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 from boton import Boton
 from atril import Atril
 from pozo import Pozo
+form chequear import Check
 import sys
 class Tablero2():
 
@@ -44,17 +45,27 @@ class Tablero2():
     layout.append([sg.Button("Cerrar")])
     window = sg.Window('Tablero', layout)
     letra = ''
+    pal=[]
     valor={}
+    cont = 0
     sg.popup('La primer letra se debe ubicar en el centro del tablero')
     while True:
       event,values = window.Read()
       try:
         if event == "Cerrar":
           break
+        elif event == "Check":
+          c = Check()
+          buscado = c.buscar("".join(pal))
+          print(buscado) 
+          pal.clear()
         elif event.isalpha():
           letra = event
+          window.Element(event).Update('')
         elif ((event.isalpha() == False) and (letra != '') and (valor[event]==False) ):
           window.Element(event).Update(letra)
+          cont = cont + 1
+          pal.append(letra)
           num = event
           valor[event]=True
           letra=""
@@ -62,6 +73,7 @@ class Tablero2():
         sys.exit()
       except KeyError:
         window.Element(event).Update(letra)
+        pal.append(letra)
         num = event
         valor[event]=True
         letra=""
