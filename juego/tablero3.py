@@ -29,10 +29,10 @@ class Tablero3():
 
   def crearTablero(self):
     layout = []
-    for i in self.matriz:
+    for i in range(15):
       row = []
-      for j in i:
-        button = Boton(j).get_boton()
+      for j in range(15):
+        button = Boton(self.matriz[i][j]).get_boton(i,j)
         row.append(button)
       layout.append(row)
     pozo = Pozo()
@@ -52,27 +52,29 @@ class Tablero3():
     while True:
       event,values = window.Read()
       try:
-        if event == "Cerrar":
+        if event == sg.WIN_CLOSED or event == 'Cerrar':
           break
         elif event == "Check":
           c = Check()
           buscado = c.buscar("".join(pal))
           print(buscado) 
           pal.clear()
-        elif event.isalpha():
+        elif (not(event is tuple)):
           letra = event
           window.Element(event).Update('')
-        elif ((event.isalpha() == False) and (letra != '') and (valor[event]==False) ):
-          window.Element(event).Update(letra)
+        elif ((event is tuple) and (letra != '')): #and (valor[event]==False) ):
+          print(valor)
+          window[event].Update(Text = letra)
           cont = cont + 1
           pal.append(letra)
           num = event
           valor[event]=True
           letra=""
-      except AttributeError:
-        sys.exit()
+      except AttributeError as e:
+        raise e
+        #sys.exit()
       except KeyError:
-        window.Element(event).Update(letra)
+        window[event].Update(Text = letra)
         pal.append(letra)
         num = event
         valor[event]=True
