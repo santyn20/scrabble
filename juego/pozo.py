@@ -1,5 +1,6 @@
 import random
 import PySimpleGUI as sg
+from ficha import Ficha
 
 class Pozo():
 
@@ -41,11 +42,13 @@ class Pozo():
 		}
 		for key in dicc:
 			for i in range(dicc[key][0]):
-				self.pozoFichas.append((key,dicc[key][1]))
+				f = Ficha(key,dicc[key][1])
+				self.pozoFichas.append(f)
 		random.shuffle(self.pozoFichas)
 
 	def getFicha(self):
 		ficha = self.pozoFichas.pop()
 		return ficha
-
+	def getP(self):
+		return self.pozoFichas
 

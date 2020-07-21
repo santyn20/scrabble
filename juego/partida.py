@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
-from tablero1 import Tablero1
-from tablero2 import Tablero2
-from tablero3 import Tablero3
+import layout1 as ly1
+import layout2 as ly2
+import layout3 as ly3
 class Partida():
   def CrearPartida(self):
     interfaz=[
@@ -16,17 +16,16 @@ class Partida():
       [sg.Button('Volver')]
     ]
     window=sg.Window('Partida',interfaz)
-    while True:
+    ok = True
+    while ok:
       event,values=window.read()
       if event=='Tablero 1':
-        window.close()
-        tab=Tablero1()
-        tab.crearTablero()
+        ok = False
+        ly1.main()
       if event=='Tablero 2':
-        window.close()
-        tab=Tablero2()
-        tab.crearTablero()
+        ok = False
+        ly2.main()
       if event=='Tablero 3':
-        window.close()
-        tab=Tablero3()
-        tab.crearTablero()
+        ok = False
+        ly3.main()
+    window.close()

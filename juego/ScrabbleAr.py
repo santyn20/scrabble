@@ -14,8 +14,9 @@ menu=[
 diseño=[
         [sg.Column(menu,size=(125,175))]
         ]
+ok = True
 window = sg.Window('ScrabbleAr').Layout(diseño)
-while True:
+while ok:
   event,values=window.Read()
   if event == 'Configuracion':
     conf = Configuracion()
@@ -23,7 +24,7 @@ while True:
     conf.cerrarMenu()
     print(dif)
   if event == 'Nueva partida':
-    window.close()
+    ok = False
     p=Partida()
     p.CrearPartida()
   if event == 'Top 10':
@@ -31,5 +32,5 @@ while True:
     tabla=Top()
     tabla.CrearTop(archivo)
   if event == 'Salir':
-    break
+    ok = False
 window.close()
