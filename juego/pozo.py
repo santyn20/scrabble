@@ -1,3 +1,4 @@
+
 import random
 import PySimpleGUI as sg
 from ficha import Ficha
@@ -51,4 +52,5 @@ class Pozo():
 		return ficha
 	def getP(self):
 		return self.pozoFichas
+
 

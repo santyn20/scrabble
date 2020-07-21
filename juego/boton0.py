@@ -1,3 +1,4 @@
+
 import PySimpleGUI as sg
 class Boton0():
 
@@ -26,3 +27,4 @@ class Boton0():
 	def setFicha(self,f):
 		self._ficha = f
 		self._boton.Update(f.getLetra())
+

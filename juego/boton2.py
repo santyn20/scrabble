@@ -1,3 +1,4 @@
+
 import PySimpleGUI as sg
 class Boton2():
 
