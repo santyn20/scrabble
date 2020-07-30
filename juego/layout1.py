@@ -6,10 +6,8 @@ from boton2 import Boton2
 from atril import Atril
 from ficha import Ficha
 from tablero1 import Tablero1
-from IA import InteligenciaArtificial
 
 def main():
-
 
 	miPuntaje = 0
 
@@ -33,31 +31,29 @@ def main():
 
 	while ok:
 		event,values = window.read()
-
 		
-    if (type(event) == Ficha):
-      if (f != None):
-        at.devolverFicha()
-        f = None
-      else:
-        f = event.getFicha()
-        at.actualizarAtril(event)
-    if ((type(event) == Boton0) or (type(event) == Boton1) or (type(event) == Boton2)):
-      if ((event.getCoor() == (8,8)) and (f != None) and (not medio)):
-        medio = True
-      if (medio):
+		if (type(event) == Ficha):
+			if (f != None):
+				at.devolverFicha()
+				f = None
+			else:
+				f = event.getFicha()
+				at.actualizarAtril(event)
+		if ((type(event) == Boton0) or (type(event) == Boton1) or (type(event) == Boton2)):
+			if ((event.getCoor() == (8,8)) and (f != None) and (not medio)):
+				medio = True
+			if (medio):
 
-        if (ch.checkLugar(event.getCoor())):
+				if (ch.checkLugar(event.getCoor())):
 
-          if (event.getFicha() == None):
-            if (f != None):
-              if (ch.getPosIni() == (0,0)):
-                ch.setPosIni(event.getCoor())
-              event.setFicha(f)
-              ch.agregarLetra(event)
-              at.actualizarAtril(f,True)
-              f = None
-
+					if (event.getFicha() == None):
+						if (f != None):
+							if (ch.getPosIni() == (0,0)):
+								ch.setPosIni(event.getCoor())
+							event.setFicha(f)
+							ch.agregarLetra(event)
+							at.actualizarAtril(f,True)
+							f = None
 
 		if (event == "check"):
 			if (ch.buscar()):
@@ -82,4 +78,3 @@ def main():
 		if (event == "cerrar"):
 			ok = False
 	window.close()
-
