@@ -26,3 +26,8 @@ class Ficha():
 
 	def setCoor(self,p):
 		self._coor = p
+
+	def actualizar(self,f):
+		self._letra = f.getLetra()
+		self._puntaje = f.getPuntaje()
+		self._boton.Update(self._letra)

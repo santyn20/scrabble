@@ -11,8 +11,8 @@ class Atril():
 
     self.cargarAtril()
 
-  def cargarAtril(self):
-    for i in range(self._cant_letras):
+  def cargarAtril(self,cant = 7):
+    for i in range(cant):
       f = self._pozo.getFicha()
       f.setCoor(i)
       self.agregarLetras(f)
@@ -51,7 +51,16 @@ class Atril():
           i.getBoton().Update(disabled=False)
           i.getBoton().Update(button_color=("black","#F1C40F"))
 
-  #def renovarFichas(self,f):
+  def renovarFichas(self):
+    if (len(self._cache) != 0):
+      for i in self._cache:
+        indx = self._atril.index(i)
+        self._atril[indx].actualizar(self._pozo.getFicha())
+      self.limpiarCache()
+    for i in self._atril:
+      i.getBoton().Update(disabled=False)
+      i.getBoton().Update(button_color=("black","#F1C40F"))
+
 
   def devolverFicha(self):
     for i in self._atril:

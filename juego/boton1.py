@@ -27,3 +27,15 @@ class Boton1():
 	def setFicha(self,f):
 		self._ficha = f
 		self._boton.Update(f.getLetra())
+
+	def getPuntaje(self):
+		self.deshabilitarLugar()
+		return (self._ficha.getPuntaje()*2)
+
+	def deshabilitarLugar(self):
+		self._boton.Update(disabled=True)
+		self._boton.Update(button_color=("black","#186A3B"))
+
+	def limpiarFicha(self):
+		self._ficha = None
+		self._boton.Update("")

@@ -8,17 +8,26 @@ from ficha import Ficha
 from tablero1 import Tablero1
 
 def main():
+
+	miPuntaje = 0
+
+	iaPuntaje = 0
+
+	sg.theme('Dark Brown')
 	tab = Tablero1()
 	at = Atril()
 	ch = Check()
 	layout = tab.crearTablero()
 	layout.append(at.mostrarAtril())
-	layout.append([sg.Button("cerrar"),sg.Button("check")])
-	window = sg.Window('Tablero', layout)
+	layout.append([sg.Button("cerrar"),sg.Button("check"),sg.Text("Puntaje", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="p")])
+	layout.append([sg.Text("Ayuda:", size=(7,1)),sg.Text("", size=(30,1),key="ayu")])
+	window = sg.Window('Tablero', layout, finalize = True)
 	ok = True
 	f = None
 	medio = False
 	inicio = (0,0)
+
+
 
 	while ok:
 		event,values = window.read()
@@ -48,9 +57,22 @@ def main():
 
 		if (event == "check"):
 			if (ch.buscar()):
-				print ("es valida")
+				miPuntaje = ch.calcularPuntaje(miPuntaje)
+				window.FindElement("p").Update(miPuntaje)
+				ch.reiniciarPalabra()
+				ch.setPosIni((0,0))
+				at.renovarFichas()
 			else:
-				print ("es invalida")
+				at.limpiarCache()
+				at.devolverFicha()
+				ch.limpiar()
+				if (ch.getPosIni() == (8,8)):
+					medio = False
+				ch.setPosIni((0,0))
+				if (ch.getPalabra() == ''):
+					window.FindElement("ayu").Update("Ingrese una palabra!")
+				else:
+					window.FindElement("ayu").Update("La palabra '"+ch.getPalabra()+"' es invalida!")
 			
 
 		if (event == "cerrar"):

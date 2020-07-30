@@ -8,6 +8,7 @@ class Check():
     self._derecha = False
     self._abajo = False
     self._casillas = []
+    self._palabra = ''
 
 
 
@@ -46,26 +47,44 @@ class Check():
   def getPosIni(self):
     return self._posIni
 
+  def getPalabra(self):
+    return self._palabra
+
   def setPosIni(self,pos):
     self._posAct = pos
     self._posIni = pos
 
+
+  def calcularPuntaje(self,p):
+    for i in self._casillas:
+      p += i.getPuntaje()
+    return p
+
+
+  def reiniciarPalabra(self):
+    self._casillas.clear()
 
 
   def agregarLetra(self,let):
     self._casillas.append(let)
 
 
+  def limpiar(self):
+    for i in self._casillas:
+      i.limpiarFicha()
+    self.reiniciarPalabra()
+
   
   def buscar(self):
 
-    palabra = ''
+    self._palabra = ''
     for i in self._casillas:
-      palabra += i.getFicha().getLetra()
-
+      self._palabra += i.getFicha().getLetra()
     encuentro = False
-    if ( (palabra in pattern.es.spelling.keys()) and (palabra != '')):
+    if ( (self._palabra in pattern.es.spelling.keys()) and (self._palabra != '')):
       encuentro = True
+      self._derecha = False
+      self._abajo = False
     return encuentro
 
   
