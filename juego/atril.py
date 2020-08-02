@@ -3,10 +3,10 @@ from pozo import Pozo
 from ficha import Ficha
 class Atril():
 
-  def __init__(self):
+  def __init__(self,p):
     self._cant_letras = 7
     self._atril = []
-    self._pozo = Pozo()
+    self._pozo = p
     self._cache = []
 
     self.cargarAtril()
@@ -26,6 +26,9 @@ class Atril():
   def getCantLetras(self):
     return self._cant_letras
 
+  def getCache(self):
+      return self._cache
+
   def mostrarAtril(self):
     layout = []
     for i in self._atril:
@@ -35,6 +38,28 @@ class Atril():
 
   def limpiarCache(self):
     self._cache.clear()
+
+  def agregarCache(self,f):
+    self._cache.append(f)
+
+  def seleccionarFicha(self,f):
+    for i in self._atril:
+      if (i == f):
+        if (i in self._cache):
+          i.getBoton().Update(button_color=("black","#F1C40F"))
+          self._cache.remove(f)
+        else:
+          self.agregarCache(f)
+          i.getBoton().Update(button_color=("black","green"))
+
+  def deseleccionarFicha(self):
+    for i in self._cache:
+      if i in self._atril:
+        i.getBoton().Update(button_color=("black","#F1C40F"))
+    self.limpiarCache()
+
+
+
 
   def actualizarAtril(self,f = None,ok = False):
     for i in self._atril:
@@ -61,12 +86,22 @@ class Atril():
       i.getBoton().Update(disabled=False)
       i.getBoton().Update(button_color=("black","#F1C40F"))
 
+  #DEBERIA CREAR METODO DE RENOVAR FICHAS PARA LA IA (SIN LOS UPDATE DE COLOR Y DISABLED)
+
 
   def devolverFicha(self):
     for i in self._atril:
       if (not (i in self._cache)):
         i.getBoton().Update(disabled=False)
         i.getBoton().Update(button_color=("black","#F1C40F"))
+
+
+  def geteFichaByLetra(self,l):
+    for i in self._atril:
+      if (i.getLetra() == l):
+        return i
+      else:
+        return None
 
     
 

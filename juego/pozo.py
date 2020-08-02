@@ -50,7 +50,13 @@ class Pozo():
 	def getFicha(self):
 		ficha = self.pozoFichas.pop()
 		return ficha
+		
 	def getP(self):
 		return self.pozoFichas
+
+	def agregarFichas(self,fichas):
+		for i in fichas:
+			self.pozoFichas.append(i)
+		random.shuffle(self.pozoFichas)
 
 
