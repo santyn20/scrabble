@@ -9,6 +9,8 @@ class Ficha():
 		self._coor = 0
 		self._boton = sg.Button(self._letra,button_color=('black',self.getColor()), size=(3, 2), pad=(0, 0), key=self)
 
+#INICIO GETTERS Y SETTERS
+
 	def getBoton(self):
 		return self._boton
 
@@ -27,7 +29,11 @@ class Ficha():
 	def setCoor(self,p):
 		self._coor = p
 
+#FIN GETTERS Y SETTERS
+
 	def actualizar(self,f):
+		'''	Este metodo actualiza la la letra y el puntaje de una ficha. 
+				Tambien se refleja de manera visual actualizando la letra en el atril.'''
 		self._letra = f.getLetra()
 		self._puntaje = f.getPuntaje()
 		self._boton.Update(self._letra)

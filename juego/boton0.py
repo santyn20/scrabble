@@ -9,6 +9,8 @@ class Boton0():
 		self._ficha = None
 		self._boton = sg.Button("",button_color=('black',self.getColor()), size=(3, 2), pad=(0, 0), key=self)
 
+#INICIO GETTERS Y SETTERS
+
 	def getTipo(self):
 		return self._tipo
 
@@ -31,11 +33,15 @@ class Boton0():
 	def getPuntaje(self):
 		self.deshabilitarLugar()
 		return self._ficha.getPuntaje()
+
+#FIN GETTERS Y SETTERS
 		
 	def deshabilitarLugar(self):
+		'''Este metodo deshabilita los botones del tablero donde ya hay una ficha'''
 		self._boton.Update(disabled=True)
 		self._boton.Update(button_color=("black","#CCD1D1"))
 
 	def limpiarFicha(self):
+		'''Este metodo elimina la ficha que tenga el boton'''
 		self._ficha = None
 		self._boton.Update("")

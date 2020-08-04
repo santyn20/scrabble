@@ -55,6 +55,7 @@ class Pozo():
 		return self.pozoFichas
 
 	def agregarFichas(self,fichas):
+		'''Metodo para agregar una ficha al pozo'''
 		for i in fichas:
 			self.pozoFichas.append(i)
 		random.shuffle(self.pozoFichas)
