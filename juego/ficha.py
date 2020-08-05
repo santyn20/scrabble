@@ -37,3 +37,9 @@ class Ficha():
 		self._letra = f.getLetra()
 		self._puntaje = f.getPuntaje()
 		self._boton.Update(self._letra)
+
+	def actualizarIA(self,f):
+		'''	Este metodo actualiza la la letra y el puntaje de una ficha. 
+				Tambien se refleja de manera visual actualizando la letra en el atril.'''
+		self._letra = f.getLetra()
+		self._puntaje = f.getPuntaje()

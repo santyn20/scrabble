@@ -19,18 +19,21 @@ class Atril():
 
   def agregarLetras(self, l):
     '''Agrego una ficha en particular al atril'''
-      self._atril.append(l)
+    self._atril.append(l)
 
 #INICIO GETTERS Y SETTERS
 
   def getLetra(self, i):
-      return self._atril[i]
+    return self._atril[i]
 
   def getCantLetras(self):
     return self._cant_letras
 
   def getCache(self):
-      return self._cache
+    return self._cache
+
+  def getAtril(self):
+    return self._atril
 
 #FIN GETTERS Y SETTERS
 
@@ -93,11 +96,22 @@ class Atril():
     if (len(self._cache) != 0):
       for i in self._cache:
         indx = self._atril.index(i)
-        self._atril[indx].actualizar(self._pozo.getFicha())
+        self._atril[indx].actualizar(self._pozo.getFicha()) #DEBERIA VER QUE PASA CUANDO NO HAY FICHAS EN EL POZO <------------
       self.limpiarCache()
     for i in self._atril:
       i.getBoton().Update(disabled=False)
       i.getBoton().Update(button_color=("black","#F1C40F"))
+
+
+
+  def renovarFichasIA(self):
+    ''' Este metodo se usa cuando se quiere confirmar el cambio de fichas.
+        Reemplaza las fichas seleccionadas (las que estan en el cache) con unas nuevas del pozo.'''
+    if (len(self._cache) != 0):
+      for i in self._cache:
+        indx = self._atril.index(i)
+        self._atril[indx].actualizarIA(self._pozo.getFicha()) #DEBERIA VER QUE PASA CUANDO NO HAY FICHAS EN EL POZO <------------
+      self.limpiarCache()
 
   #DEBERIA CREAR METODO DE RENOVAR FICHAS PARA LA IA (SIN LOS UPDATE DE COLOR Y DISABLED)
 
@@ -110,11 +124,11 @@ class Atril():
 
 
   def getFichaByLetra(self,l):
+
     for i in self._atril:
       if (i.getLetra() == l):
         return i
-      else:
-        return None
+    return None
 
     
 

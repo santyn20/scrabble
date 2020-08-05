@@ -59,6 +59,5 @@ class Tablero1():
     for i in self._botones:
       if (i.getCoor() == pos):
         return i
-      else:
-        return (0,0)
+    return (0,0)
     

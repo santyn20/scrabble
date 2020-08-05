@@ -7,6 +7,9 @@ from atril import Atril
 from ficha import Ficha
 from pozo import Pozo
 from tablero1 import Tablero1
+from intArt import IntArt
+import pickle
+
 
 def main():
 
@@ -21,9 +24,14 @@ def main():
 	at = Atril(pozo)
 	ch = Check()
 	layout = tab.crearTablero()
+	ia = IntArt(tab,pozo)
+	layout.insert(0,[sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),
+		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),
+		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Text("Puntaje IA", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="pI")])
 	layout.append(at.mostrarAtril())
 	layout.append([sg.Button("cerrar"),sg.Button("check"),sg.Button("cambiar fichas"),sg.Button("cancelar",disabled=True),sg.Text("Puntaje", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="p")])
 	layout.append([sg.Text("Ayuda:", size=(7,1)),sg.Text("", size=(30,1),key="ayu")])
+	layout.append([sg.Button("guardar")])
 	window = sg.Window('Tablero', layout, finalize = True)
 	ok = True
 	f = None
@@ -131,6 +139,9 @@ def main():
 					#Cuando termino de armar una palabra vuelvo a habilitar el boton para cambiar fichas, si es que aun tengo usos
 					window.FindElement("cambiar fichas").Update(disabled=False)
 				#TURNO DE LA IA <---------
+				window.finalize()
+				iaPuntaje += ia.selecPos()
+				window.FindElement("pI").Update(iaPuntaje)
 			else:
 				#Si la palabra no es correcta, devuelvo las letras
 				at.limpiarCache()
@@ -148,6 +159,7 @@ def main():
 					#Si se ingreso una palabra, pero es incorrecta, actualizo mensaje de ayuda
 					window.FindElement("ayu").Update("La palabra '"+ch.getPalabra()+"' es invalida!")
 					jugando = False
+					ch.setPosIni((0,0))
 					window.FindElement("cambiar fichas").Update(disabled=False)
 			
 

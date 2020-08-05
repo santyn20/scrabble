@@ -14,6 +14,8 @@ class Check():
 
   def checkLugar(self,pos):
     '''Este metodo verifica que la posicion en la que se esta poninendo una ficha sea correcto'''
+    if ((pos[0] > 15) or (pos[1] > 15)):
+      return False
 
     if (self._posIni == (0,0)):
       #Entra si es la primer ficha para una palabra
