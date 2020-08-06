@@ -1,14 +1,18 @@
 import pattern.es
+from config import Configuracion
+import random
 class Check():
 
 
-  def __init__(self):
+  def __init__(self,conf):
     self._posIni = (0,0)
     self._posAct = (0,0)
     self._derecha = False
     self._abajo = False
     self._casillas = [] #<---Lista con los botones donde se esta ingresando una palabra
     self._palabra = '' #<---La palabra en si
+    self._conf=conf.Nivel()
+    self._tipo=random.choice(["VB","NN","JJ"])
 
 
 
@@ -103,7 +107,7 @@ class Check():
       return False
     encuentro = False
     if ( (self._palabra in pattern.es.spelling.keys()) and (self._palabra != '')):
-      encuentro = True
+      encuentro = self.buscarPorNivel(pattern.es.parse(self._palabra).split())
       self._derecha = False
       self._abajo = False
     return encuentro
@@ -123,7 +127,6 @@ class Check():
     else:
       for cada in p:
         for c in cada:
-          tipo=random.choice(listaDePalabras=["VB","NN","JJ"])
           if (c[1] == tipo):
             return True
   

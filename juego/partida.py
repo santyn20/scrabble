@@ -3,7 +3,7 @@ import layout1 as ly1
 import layout2 as ly2
 import layout3 as ly3
 class Partida():
-  def CrearPartida(self):
+  def CrearPartida(self,conf):
     interfaz=[
       [sg.Text('Apodo/Nombre')],
       [sg.InputText(size=(15,1))],
@@ -21,11 +21,11 @@ class Partida():
       event,values=window.read()
       if event=='Tablero 1':
         ok = False
-        ly1.main()
+        ly1.main(conf)
       if event=='Tablero 2':
         ok = False
-        ly2.main()
+        ly2.main(conf)
       if event=='Tablero 3':
         ok = False
-        ly3.main()
+        ly3.main(conf)
     window.close()

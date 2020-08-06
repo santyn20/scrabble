@@ -17,16 +17,14 @@ diseño=[
 ok = True
 
 window = sg.Window('ScrabbleAr').Layout(diseño)
+conf = Configuracion()
 while ok:
   event,values=window.Read()
   if event == 'Configuracion':
-    
-    dif = conf.crearMenu()
-    conf.cerrarMenu()
-    print(dif)
+    conf.crearMenu()
   if event == 'Nueva partida':
     p=Partida()
-    p.CrearPartida()
+    p.CrearPartida(conf)
   if event == 'Top 10':
     archivo= open("puntos.txt","r")
     tabla=Top()

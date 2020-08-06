@@ -1,6 +1,10 @@
 import PySimpleGUI as sg
 class Configuracion():
   def __init__(self):
+    self._nivel='Normal'
+
+  def crearMenu(self):
+    ok = True
     diseño = [
       [sg.Text('Configuracion')],
       [sg.Column([
@@ -10,16 +14,22 @@ class Configuracion():
     ])],
       [sg.Button('Guardar'), sg.Button('Cancelar')]
     ]
-    self._window = sg.Window('Configuracion').Layout(diseño)
+    window = sg.Window('Configuracion').Layout(diseño)
+    self._nivel='Normal'
 
-  def crearMenu(self):
-    while True:
-      event, values = self._window.Read()
+    while ok:
+      event, values = window.Read()
       if (event == 'Guardar'):
+        ok = False
         if (len(values['dif']) > 0):
-          return (values['dif'][0])
-        else:
-          return('Normal')
-  
+          self._nivel=values['dif'][0]
+      if (event == sg.WIN_CLOSED):
+        ok = False
+    print(self._nivel)
+    window.close()
+    
   def cerrarMenu(self):
     self._window.close()
+
+  def Nivel(self):
+    return self._nivel

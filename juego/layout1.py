@@ -8,10 +8,9 @@ from ficha import Ficha
 from pozo import Pozo
 from tablero1 import Tablero1
 from intArt import IntArt
-import pickle
 
 
-def main():
+def main(conf):
 
 	pozo = Pozo()
 
@@ -22,9 +21,9 @@ def main():
 	sg.theme('Dark Brown')
 	tab = Tablero1()
 	at = Atril(pozo)
-	ch = Check()
+	ch = Check(conf)
 	layout = tab.crearTablero()
-	ia = IntArt(tab,pozo)
+	ia = IntArt(tab,pozo,conf)
 	layout.insert(0,[sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),
 		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),
 		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Text("Puntaje IA", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="pI")])
@@ -176,7 +175,8 @@ def main():
 						jugando = False
 						ch.reiniciar()
 						ch.setPosIni((0,0))
-						window.FindElement("cambiar fichas").Update(disabled=False)
+						if (contCambio < 3):
+							window.FindElement("cambiar fichas").Update(disabled=False)
 		except:
 			if (miPuntaje > iaPuntaje):
 				sg.popup("Has Ganado!")

@@ -15,10 +15,10 @@ from tablero1 import Tablero1
 
 class IntArt():
 
-	def __init__(self,tab,p):
+	def __init__(self,tab,p,conf):
 		self._atril = Atril(p)
 		self._tablero = tab
-		self._ch = Check()
+		self._ch = Check(conf)
 
 
 	def selecPos(self):
@@ -87,7 +87,7 @@ class IntArt():
 				lista1Cadena=" ".join(self.datosBuenos())
 				encontrados = re.finditer(regex, lista1Cadena, re.MULTILINE)
 				cantidad=len([matchNum for matchNum, match in enumerate(encontrados, start=1)])
-				if cantidad >= 1:
+				if (cantidad >= 1):
 					pal.append(x)
 		pal.sort(key = lambda s: len(s))
 		return(pal.pop())
