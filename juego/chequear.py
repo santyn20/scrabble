@@ -69,6 +69,10 @@ class Check():
 
 #FIN GETTERS Y SETTERS
 
+  def reiniciar(self):
+    self._derecha = False
+    self._abajo = False
+
   def calcularPuntaje(self,p):
     '''Calculo el puntaje de la palabra ingresada'''
     for i in self._casillas:
@@ -95,6 +99,8 @@ class Check():
     self._palabra = ''
     for i in self._casillas:
       self._palabra += i.getFicha().getLetra()
+    if (len(self._palabra) < 2):
+      return False
     encuentro = False
     if ( (self._palabra in pattern.es.spelling.keys()) and (self._palabra != '')):
       encuentro = True
@@ -102,4 +108,22 @@ class Check():
       self._abajo = False
     return encuentro
 
+
+  def buscarPorNivel(self,p):
+    if self._conf=="Facil":
+      for cada in p:
+        for c in cada:
+          if ((c[1] == 'VB') or (c[1] ==  "NNS" or c[1] ==  "NN") or (c[1] ==  "JJ")):
+            return True
+    elif self._conf=="Normal":
+      for cada in p:
+        for c in cada:
+          if ((c[1] == 'VB')or(c[1] ==  "NNS") or (c[1] ==  "NN")):
+            return True
+    else:
+      for cada in p:
+        for c in cada:
+          tipo=random.choice(listaDePalabras=["VB","NN","JJ"])
+          if (c[1] == tipo):
+            return True
   

@@ -7,6 +7,7 @@ from atril import Atril
 from ficha import Ficha
 from pozo import Pozo
 from tablero2 import Tablero2
+from intArt import IntArt
 import pickle
 
 
@@ -23,6 +24,10 @@ def main():
 	at = Atril(pozo)
 	ch = Check()
 	layout = tab.crearTablero()
+	ia = IntArt(tab,pozo)
+	layout.insert(0,[sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),
+		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Button("",size=(3,2),pad=(0,0),disabled=True),
+		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Text("Puntaje IA", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="pI")])
 	layout.append(at.mostrarAtril())
 	layout.append([sg.Button("cerrar"),sg.Button("check"),sg.Button("cambiar fichas"),sg.Button("cancelar",disabled=True),sg.Text("Puntaje", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="p")])
 	layout.append([sg.Text("Ayuda:", size=(7,1)),sg.Text("", size=(30,1),key="ayu")])
@@ -108,8 +113,21 @@ def main():
 					if (contCambio == 3):
 						#Si ya gaste todos mis cambios, deshabilito el boton
 						window.FindElement("cambiar fichas").Update(disabled=True)
-
-					#TURNO DE LA IA <---------
+					try:
+						#TURNO DE LA IA <---------
+						window.FindElement("ayu").Update("Turno de tu oponente!")
+						window.finalize()
+						iaPuntaje += ia.selecPos()
+						window.FindElement("pI").Update(iaPuntaje)
+						window.FindElement("ayu").Update("Tu turno!")
+					except:
+						if (miPuntaje > iaPuntaje):
+							sg.popup("Has Ganado!")
+						elif (miPuntaje < iaPuntaje):
+							sg.popup("Has Perdido!")
+						else:
+							sg.popup("Empate!")
+						ok = False
 
 				if (event == "cancelar"):
 					#Cancelo el cambio de fichas
@@ -119,42 +137,64 @@ def main():
 
 
 
-
-		if (event == "check"):
-			#Se ejecuta si quiero verificar que la palabra ingresada es correcta mediante el boton "check"
-			if (ch.buscar()):
-				#Verifico que la palabra ingresada sea correcta, en caso de serlo calculo el puntaje y renuevo las fichas usadas
-				miPuntaje = ch.calcularPuntaje(miPuntaje)
-				window.FindElement("p").Update(miPuntaje)
-				ch.reiniciarPalabra()
-				ch.setPosIni((0,0))
-				at.renovarFichas()
-				jugando = False
-				if (contCambio < 3):
-					#Cuando termino de armar una palabra vuelvo a habilitar el boton para cambiar fichas, si es que aun tengo usos
-					window.FindElement("cambiar fichas").Update(disabled=False)
-				#TURNO DE LA IA <---------
-			else:
-				#Si la palabra no es correcta, devuelvo las letras
-				at.limpiarCache()
-				at.devolverFicha()
-				ch.limpiar()
-				if (ch.getPosIni() == (8,8)):
-					#Si la palabra incorrecta era la primera de todas, el medio vuelve a ser requerido
-					medio = False
-				ch.setPosIni((0,0))
-				ch.reiniciarPalabra()
-				if (ch.getPalabra() == ''):
-					#Actualizo el mensaje de ayuda si no se ingreso una palabra
-					window.FindElement("ayu").Update("Ingrese una palabra!")
-				else:
-					#Si se ingreso una palabra, pero es incorrecta, actualizo mensaje de ayuda
-					window.FindElement("ayu").Update("La palabra '"+ch.getPalabra()+"' es invalida!")
+		try:
+			if (event == "check"):
+				#Se ejecuta si quiero verificar que la palabra ingresada es correcta mediante el boton "check"
+				if (ch.buscar()):
+					#Verifico que la palabra ingresada sea correcta, en caso de serlo calculo el puntaje y renuevo las fichas usadas
+					miPuntaje = ch.calcularPuntaje(miPuntaje)
+					window.FindElement("p").Update(miPuntaje)
+					ch.reiniciarPalabra()
+					ch.setPosIni((0,0))
+					at.renovarFichas()
 					jugando = False
-					window.FindElement("cambiar fichas").Update(disabled=False)
+					if (contCambio < 3):
+						#Cuando termino de armar una palabra vuelvo a habilitar el boton para cambiar fichas, si es que aun tengo usos
+						window.FindElement("cambiar fichas").Update(disabled=False)
+					#TURNO DE LA IA <---------
+					window.FindElement("ayu").Update("Turno de tu oponente!")
+					window.finalize()
+					iaPuntaje += ia.selecPos()
+					window.FindElement("pI").Update(iaPuntaje)
+					window.FindElement("ayu").Update("Tu turno!")
+				else:
+					#Si la palabra no es correcta, devuelvo las letras
+					at.limpiarCache()
+					at.devolverFicha()
+					ch.limpiar()
+					if (ch.getPosIni() == (8,8)):
+						#Si la palabra incorrecta era la primera de todas, el medio vuelve a ser requerido
+						medio = False
+					ch.setPosIni((0,0))
+					ch.reiniciarPalabra()
+					if (ch.getPalabra() == ''):
+						#Actualizo el mensaje de ayuda si no se ingreso una palabra
+						window.FindElement("ayu").Update("Ingrese una palabra!")
+					else:
+						#Si se ingreso una palabra, pero es incorrecta, actualizo mensaje de ayuda
+						window.FindElement("ayu").Update("La palabra '"+ch.getPalabra()+"' es invalida!")
+						jugando = False
+						ch.reiniciar()
+						ch.setPosIni((0,0))
+						window.FindElement("cambiar fichas").Update(disabled=False)
+		except:
+			if (miPuntaje > iaPuntaje):
+				sg.popup("Has Ganado!")
+			elif (miPuntaje < iaPuntaje):
+				sg.popup("Has Perdido!")
+			else:
+				sg.popup("Empate!")
+			ok = False
 			
 
 		if (event == "cerrar"):
 			#Cerrar el juego
+			valor = sg.popup_ok_cancel('Seguro que quieres salir?')
+			ok = (valor == "Cancel")
+			if (valor == None):
+				ok = True
+
+		if (event == sg.WIN_CLOSED):
 			ok = False
+			
 	window.close()

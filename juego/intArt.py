@@ -22,18 +22,12 @@ class IntArt():
 
 
 	def selecPos(self):
-		for i in self._atril.getAtril():
-			print(i.getLetra())
 		palabra = self.buscar()
 		lugares = [] #<--botones
 		seguir = True
-		rendirse = 0
-		print (palabra)
 		while (seguir):
-			rendirse += 1
 			lugar = random.choice(self._tablero.getBotones())
 			if (lugar.getFicha() == None):
-				#self._ch._derecha = True #usar set
 				orientacion = random.randint(1,2)
 
 				if (orientacion == 1):
@@ -58,9 +52,9 @@ class IntArt():
 						else:
 							lugares.clear()
 							break
-				if ((len(lugares) > 0) or (rendirse == 10)):
+				if ((len(lugares) > 0)):
 					seguir = False
-		#SI SE RINDIO SALE DEL METODO
+
 		cant = 0
 		p = 0
 		for i in lugares:

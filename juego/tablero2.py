@@ -56,3 +56,9 @@ class Tablero2():
 
   def getBotones(self):
     return self._botones
+
+  def getBotonByPos(self,pos):
+    for i in self._botones:
+      if (i.getCoor() == pos):
+        return i
+    return (0,0)

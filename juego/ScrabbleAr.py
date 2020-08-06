@@ -3,7 +3,7 @@ import json
 from config import Configuracion
 from partida import Partida
 from top import Top
-
+sg.theme('Dark Brown')
 menu=[
         [sg.Submit('Nueva partida')],
         [sg.Button('Continuar')],
@@ -15,16 +15,16 @@ diseño=[
         [sg.Column(menu,size=(125,175))]
         ]
 ok = True
+
 window = sg.Window('ScrabbleAr').Layout(diseño)
 while ok:
   event,values=window.Read()
   if event == 'Configuracion':
-    conf = Configuracion()
+    
     dif = conf.crearMenu()
     conf.cerrarMenu()
     print(dif)
   if event == 'Nueva partida':
-    ok = False
     p=Partida()
     p.CrearPartida()
   if event == 'Top 10':
@@ -32,5 +32,7 @@ while ok:
     tabla=Top()
     tabla.CrearTop(archivo)
   if event == 'Salir':
+    ok = False
+  if (event == sg.WIN_CLOSED):
     ok = False
 window.close()
