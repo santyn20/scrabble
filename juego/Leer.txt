@@ -4,3 +4,8 @@ Integrantes:
 	Fermin Miranda
 Ejecutar:
 	El juego tiene algunas fallas para ejecutarse en Linux, sin embargo en Windows funciona, tratar de ejecutarlo en ese sistema operativo.
+
+Notas:
+	Lo relacionado a guardar partidas y datos no llegamos a terminarlo. El juego en si contra la IA deberia estar completo.
+	La IA puede tener problemas al armar una palabra si una de sus fichas es una "rr" o una "ll", por lo que cambiamos la cantidad de estas fichas a 0.
+	

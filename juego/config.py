@@ -25,7 +25,6 @@ class Configuracion():
           self._nivel=values['dif'][0]
       if (event == sg.WIN_CLOSED):
         ok = False
-    print(self._nivel)
     window.close()
     
   def cerrarMenu(self):
