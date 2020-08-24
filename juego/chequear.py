@@ -127,6 +127,6 @@ class Check():
     else:
       for cada in p:
         for c in cada:
-          if (c[1] == tipo):
+          if (c[1] == self._tipo):
             return True
   
