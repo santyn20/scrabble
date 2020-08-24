@@ -119,7 +119,7 @@ def main(conf):
 						iaPuntaje += ia.selecPos()
 						window.FindElement("pI").Update(iaPuntaje)
 						window.FindElement("ayu").Update("Tu turno!")
-					except:
+					except IndexError:
 						if (miPuntaje > iaPuntaje):
 							sg.popup("Has Ganado!")
 						elif (miPuntaje < iaPuntaje):
@@ -177,7 +177,7 @@ def main(conf):
 						ch.setPosIni((0,0))
 						if (contCambio < 3):
 							window.FindElement("cambiar fichas").Update(disabled=False)
-		except:
+		except IndexError:
 			if (miPuntaje > iaPuntaje):
 				sg.popup("Has Ganado!")
 			elif (miPuntaje < iaPuntaje):
