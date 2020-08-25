@@ -88,6 +88,9 @@ class IntArt():
 				encontrados = re.finditer(regex, lista1Cadena, re.MULTILINE)
 				cantidad=len([matchNum for matchNum, match in enumerate(encontrados, start=1)])
 				if (cantidad >= 1):
-					pal.append(x)
+					if(self._ch.buscarPorNivel(pattern.es.parse(x).split())):
+						pal.append(x)
+										
+		print(pal)			  
 		pal.sort(key = lambda s: len(s))
 		return(pal.pop())
