@@ -8,9 +8,13 @@ from ficha import Ficha
 from pozo import Pozo
 from tablero1 import Tablero1
 from intArt import IntArt
+from GuardarDatos import GuardarDatos
 
 
-def main(conf):
+def main(conf,nom):
+
+	gd = GuardarDatos()
+
 
 	pozo = Pozo()
 
@@ -197,4 +201,5 @@ def main(conf):
 		if (event == sg.WIN_CLOSED):
 			ok = False
 			
+	gd.guardar(nom,miPuntaje)
 	window.close()

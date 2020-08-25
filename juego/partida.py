@@ -20,8 +20,9 @@ class Partida():
     while ok:
       event,values=window.read()
       if event=='Tablero 1':
+        nom = values[0]
         ok = False
-        ly1.main(conf)
+        ly1.main(conf,nom)
       if event=='Tablero 2':
         ok = False
         ly2.main(conf)

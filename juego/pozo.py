@@ -9,7 +9,7 @@ class Pozo():
 
 
 	def __init__(self):
-		archivo = open("fichas.txt", "r")
+		archivo = open("fichas.json", "r")
 		datos = json.load(archivo)
 		dicc ={
 			'a':[datos["A"]["cant"],datos["A"]["punt"]],
