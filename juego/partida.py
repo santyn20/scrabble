@@ -24,9 +24,11 @@ class Partida():
         ok = False
         ly1.main(conf,nom)
       if event=='Tablero 2':
+        nom = values[0]
         ok = False
-        ly2.main(conf)
+        ly2.main(conf,nom)
       if event=='Tablero 3':
+        nom = values[0]
         ok = False
-        ly3.main(conf)
+        ly3.main(conf,nom)
     window.close()

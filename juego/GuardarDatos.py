@@ -4,13 +4,13 @@ class GuardarDatos():
 	def __init__(self):
 		self._datos = {}
 		
-	def guardar(self, nom, punt):
+	def guardar(self, nom, punt, niv):
 		fecha = time.strftime("%c")
 		nombre = nom
 		puntaje = int(punt)
 
 
-		dato_nuevo = {'nombre':nombre,'puntaje': punt}
+		dato_nuevo = {'nombre':nombre,'puntaje': punt, 'nivel':niv}
 		self._datos.setdefault(fecha,dato_nuevo)
 		print(self._datos)
 		try:
