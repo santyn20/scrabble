@@ -10,19 +10,19 @@ class Top():
         break
       n=[]
 
-      jg=sg.Text(x,size=(2,1))
+      jg=sg.Text(x,size=(4,1))
       n.append(jg)
       
       if (datos[i]["nombre"] == ""):
-        jg=sg.Text("Anonimo")
+        jg=sg.Text("Anonimo",size=(10,1))
       else:
-        jg=sg.Text(datos[i]["nombre"])
+        jg=sg.Text(datos[i]["nombre"],size=(10,1))
       n.append(jg)
-      jg=sg.Text(datos[i]["puntaje"])
+      jg=sg.Text(datos[i]["puntaje"],size=(4,1))
       n.append(jg)
-      jg=sg.Text(datos[i]["nivel"])
+      jg=sg.Text(datos[i]["nivel"],size=(10,1))
       n.append(jg)
-      jg=sg.Text(i)
+      jg=sg.Text(i,size=(15,1))
       n.append(jg)
       x+=1
       layout.append(n)

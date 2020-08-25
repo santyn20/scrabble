@@ -8,4 +8,4 @@ Ejecutar:
 Notas:
 	La IA puede tener problemas al armar una palabra si una de sus fichas es una "rr" o una "ll".
 	Version de Python utilizada: 3.6
-	
+	Version de PySimpleGUI: 4.22.0

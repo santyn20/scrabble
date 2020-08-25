@@ -10,6 +10,7 @@ from tablero2 import Tablero2
 from intArt import IntArt
 from GuardarDatos import GuardarDatos
 from config import Configuracion
+import random
 
 
 
@@ -35,7 +36,7 @@ def main(conf,nom):
 		sg.Button("",size=(3,2),pad=(0,0),disabled=True),sg.Text("Puntaje IA", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="pI")])
 	layout.append(at.mostrarAtril())
 	layout.append([sg.Button("cerrar"),sg.Button("check"),sg.Button("cambiar fichas"),sg.Button("cancelar",disabled=True),sg.Text("Puntaje", size=(7,1)),sg.Text(miPuntaje, size=(4,1),key="p")])
-	layout.append([sg.Text("Ayuda:", size=(7,1)),sg.Text("", size=(30,1),key="ayu")])
+	layout.append([sg.Text("Ayuda:", size=(7,1)),sg.Text("", size=(30,1),key="ayu"),sg.Text("Dificultad:"+conf.Nivel())])
 	layout.append([sg.Button("guardar")])
 	window = sg.Window('Tablero', layout, finalize = True)
 	ok = True
@@ -45,6 +46,15 @@ def main(conf,nom):
 	inicio = (0,0)
 
 	contCambio = 0
+
+	turno = random.randint(1,2)
+	if(turno == 1):
+		#TURNO DE LA IA <---------
+		window.FindElement("ayu").Update("Turno de tu oponente!")
+		window.finalize()
+		iaPuntaje += ia.selecPos()
+		window.FindElement("pI").Update(iaPuntaje)
+		window.FindElement("ayu").Update("Tu turno!")
 
 
 

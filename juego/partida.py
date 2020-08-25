@@ -31,4 +31,6 @@ class Partida():
         nom = values[0]
         ok = False
         ly3.main(conf,nom)
+      if event == "Volver":
+        ok = False
     window.close()
