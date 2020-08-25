@@ -26,7 +26,7 @@ while ok:
     p=Partida()
     p.CrearPartida(conf)
   if event == 'Top 10':
-    archivo= open("puntos.txt","r")
+    archivo= open("datos_juego.json","r")
     tabla=Top()
     tabla.CrearTop(archivo)
   if event == 'Salir':
