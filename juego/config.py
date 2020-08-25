@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from configFichas import ConfigFichas
 class Configuracion():
   def __init__(self):
     self._nivel='Normal'
@@ -12,13 +13,16 @@ class Configuracion():
       [sg.Text('Facil: Se tomara en cuenta cualquier palabra')],
       [sg.Text('Normal y dificil: Solo se tomaran en cuenta adjetivos y verbos')]
     ])],
-      [sg.Button('Guardar'), sg.Button('Cancelar')]
+      [sg.Button('Guardar'), sg.Button('Cancelar'), sg.Button("Configurar Fichas")]
     ]
     window = sg.Window('Configuracion').Layout(diseño)
     self._nivel='Normal'
 
     while ok:
       event, values = window.Read()
+      if (event == "Configurar Fichas"):
+        cfg = ConfigFichas()
+        cfg.main()
       if (event == 'Guardar'):
         ok = False
         if (len(values['dif']) > 0):
